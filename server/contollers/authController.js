@@ -55,17 +55,17 @@ const createUser = asyncHandler(async (req,res)=> {
 // @access Public
 const login = asyncHandler(async (req,res)=> {
     //get info from request body
-    const {email, password} = req.body    
+    const {username, password} = req.body    
     //Confirm data
-    if(!email || !password){
+    if(!username || !password){
         return res.status(400).json({message: 'All fields are required'})
     }
     //find a user with the email
-    const user = await User.findOne({email}).exec()
+    const user = await User.findOne({username}).exec()
 
     //if there is no user with that email, return error message
     if(!user){
-        return res.status(400).json({message: `No user with email: ${email} found`})
+        return res.status(400).json({message: `No user with username: ${username} found`})
     }
     //if there is a user, then compare the password entered to actual password
     const compare = await bcrypt.compare(password, user.password);

@@ -7,7 +7,7 @@ import {loginStart,loginSuccess,loginFailed} from '../../redux/userSlice'
 import { useNavigate } from "react-router-dom"
 
 const LoginModal = () => {
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const LoginModal = () => {
         e.preventDefault()
         dispatch(loginStart())
         try{
-            const res = await axios.post("/auth/login", {email: email, password:password})
+            const res = await axios.post("/auth/login", {username: username, password:password})
             dispatch(loginSuccess(res.data));
             navigate("/home")
         } catch(err){
@@ -31,9 +31,9 @@ const LoginModal = () => {
             <h2 className="text-3xl font-bold text-center">Return to the Conversation</h2>
         
             <input 
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
                 type="text" 
-                placeholder="Email"
+                placeholder="Username"
                 required={true}          
                 className="text-l py-1 rounded-lg px-4"
             />
