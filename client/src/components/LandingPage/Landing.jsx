@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from "react-router-dom"
 import {useState} from 'react'
 import LoginModal from '../Modal/loginModal';
 import SignupModal from '../Modal/signupModal';
