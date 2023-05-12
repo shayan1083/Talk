@@ -1,9 +1,7 @@
 import React, {useState} from "react"
-import {Link} from 'react-router-dom'
 import axios from "axios"
 import {useDispatch} from 'react-redux'
 import {loginStart,loginSuccess,loginFailed} from '../../redux/userSlice'
-
 import { useNavigate } from "react-router-dom"
 
 const LoginModal = () => {
@@ -19,7 +17,7 @@ const LoginModal = () => {
         try{
             const res = await axios.post("/auth/login", {username: username, password:password})
             dispatch(loginSuccess(res.data));
-            navigate("/home")
+            navigate("/talk/home")
         } catch(err){
             dispatch(loginFailed())
             console.log(err)
@@ -34,7 +32,7 @@ const LoginModal = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 type="text" 
                 placeholder="Username"
-                required={true}          
+                required="true"       
                 className="text-l py-1 rounded-lg px-4"
             />
             
@@ -42,7 +40,7 @@ const LoginModal = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 type="password" 
                 placeholder="Password" 
-                required={true}
+                required="true"
                 className="text-l py-1 rounded-lg px-4"
             />
 

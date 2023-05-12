@@ -23,7 +23,7 @@ const Navbar = () =>{
 
             <div className="px-0 md:px-6 mx0-auto my-4">
                 <SearchIcon className="absolute m-2"/>
-                <input type="text" placeHolder="Search" className="bg-emerald-200 rounded-lg py-2 px-8"></input>
+                <input type="text" placeholder="Search" className="bg-emerald-200 rounded-lg py-2 px-8"></input>
             </div>
         </div>
     )

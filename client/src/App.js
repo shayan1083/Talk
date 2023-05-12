@@ -43,19 +43,19 @@ const router = createBrowserRouter([
   },
   //these will all have the navbar above them
   {
-    path: "/",
+    path: "/talk",
     element: <Layout/>,
     children: [
       {
-        path: "/home",
+        path: "/talk/home",
         element: <Home/>
       },
       {
-        path: "/profile/:id",
+        path: "/talk/profile/:id",
         element: <Profile/>
       },
       {
-        path: "/explore",
+        path: "/talk/explore",
         element: <Explore/>
      },    
     ],
