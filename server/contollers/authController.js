@@ -11,10 +11,10 @@ const jwt = require('jsonwebtoken')
 // @access Public
 const createUser = asyncHandler(async (req,res)=> {
     //get info from request body
-    const {fname, lname, username, email, password } = req.body
+    const {fname, lname, username, email } = req.body
     
     //Confirm data
-    if(!fname || !lname || !username || !email || !password){
+    if(!fname || !lname || !username || !email || !req.body.password){
         return res.status(400).json({message: 'All fields are required'})
     }
 
@@ -29,7 +29,7 @@ const createUser = asyncHandler(async (req,res)=> {
     }
 
     //hash password
-    const hashedPass = await bcrypt.hash(password, 10) //10 salt rounds
+    const hashedPass = await bcrypt.hash(req.body.password, 10) //10 salt rounds
 
     //creat user object with hashed password to store in database 
     const userObject = {fname, lname, username, email, "password": hashedPass}
@@ -40,9 +40,10 @@ const createUser = asyncHandler(async (req,res)=> {
     //create access token
     const token = jwt.sign({id: user._id}, process.env.ACCESS_TOKEN_SECRET)
 
+    const {password, ...userData} = user._doc
     //if user is created then send message otherwise error
     if(user){
-        res.cookie("access_token", token, {httpOnly:true}).status(200).json({message: `User ${username} successfully created`})
+        res.cookie("access_token", token, {httpOnly:true}).status(200).json(userData)
     }
     else{
         res.status(400).json({message: 'Inavlid user data recieved'})
@@ -55,9 +56,9 @@ const createUser = asyncHandler(async (req,res)=> {
 // @access Public
 const login = asyncHandler(async (req,res)=> {
     //get info from request body
-    const {username, password} = req.body    
+    const {username} = req.body    
     //Confirm data
-    if(!username || !password){
+    if(!username || !req.body.password){
         return res.status(400).json({message: 'All fields are required'})
     }
     //find a user with the email
@@ -68,7 +69,7 @@ const login = asyncHandler(async (req,res)=> {
         return res.status(400).json({message: `No user with username: ${username} found`})
     }
     //if there is a user, then compare the password entered to actual password
-    const compare = await bcrypt.compare(password, user.password);
+    const compare = await bcrypt.compare(req.body.password, user.password);
     if(!compare){
         return res.status(400).json({message: 'Password is incorrect'})
     }
@@ -86,8 +87,9 @@ const login = asyncHandler(async (req,res)=> {
         {expiresIn: '1d'}
     )
 
+    const {password, ...userData} = user._doc
     //send message with cookie 
-    res.cookie('access_token', accessToken,{httpOnly:true}).status(200).json({message: `Welcome, ${user.username}`})
+    res.cookie('access_token', accessToken,{httpOnly:true}).status(200).json(userData)
 
   
 })

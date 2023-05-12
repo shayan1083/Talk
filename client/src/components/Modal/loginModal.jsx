@@ -32,7 +32,7 @@ const LoginModal = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 type="text" 
                 placeholder="Username"
-                required="true"       
+                required={true}      
                 className="text-l py-1 rounded-lg px-4"
             />
             
@@ -40,7 +40,7 @@ const LoginModal = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 type="password" 
                 placeholder="Password" 
-                required="true"
+                required={true}
                 className="text-l py-1 rounded-lg px-4"
             />
 

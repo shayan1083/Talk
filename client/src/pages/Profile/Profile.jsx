@@ -2,8 +2,16 @@ import React from "react";
 import LeftSideBar from "../../components/LeftSideBar/LeftSideBar"
 import RightSideBar from "../../components/RightSideBar/RightSideBar"
 import {Link} from "react-router-dom"
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/userSlice";
 
 const Profile = () =>{
+
+    //logout button function
+    const dispatch = useDispatch()
+    const handleLogout = () => {
+        dispatch(logout())
+    }
     return (
         <div className="grid grid-cols-1 md:grid-cols-4">
             <div className="px-6">
@@ -17,7 +25,11 @@ const Profile = () =>{
                     </div>
                     <div>
                         <Link to="/">
-                            <button className="bg-red-500 px-4 py-2 text-white rounded-lg">Logout</button>
+                            <button 
+                            onClick={handleLogout}
+                            className="bg-red-500 px-4 py-2 text-white rounded-lg">
+                                Logout
+                            </button>
                         </Link>
                     </div>
                 </div>
