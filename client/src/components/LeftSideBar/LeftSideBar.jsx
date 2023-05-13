@@ -12,19 +12,19 @@ const LeftSideBar = () => {
                 <Link to="/talk/home">
                     <div className="flex items-center space-x-1 px-2 py-1 bg-emerald-200 hover:bg-emerald-300 rounded-lg cursor-pointer">
                         <HomeIcon fontSize="large"/>
-                        <p>Home</p>
+                        <p className="visible lg:visible md:invisible sm:invisible">Home</p>
                     </div>
                 </Link>
                 <Link to="/talk/explore">
                     <div className="flex items-center space-x-1 px-2 py-1 bg-emerald-200 hover:bg-emerald-300 rounded-lg cursor-pointer">
                         <TagIcon fontSize="large"/>
-                        <p>Explore</p>
+                        <p className="visible lg:visible md:invisible sm:invisible">Explore</p>
                     </div>
                 </Link>
                 <Link to="/talk/profile/id">
                     <div className="flex items-center space-x-1 px-2 py-1 bg-emerald-200 hover:bg-emerald-300 rounded-lg cursor-pointer">
                         <PersonIcon fontSize="large"/>
-                        <p>My Profile</p>
+                        <p className="visible lg:visible md:invisible sm:invisible">My Profile</p>
                     </div>
                 </Link>
             </div>

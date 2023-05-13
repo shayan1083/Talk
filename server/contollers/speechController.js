@@ -82,7 +82,7 @@ const like = asyncHandler(async (req,res) =>{
 // @access Private
 const getFeed = asyncHandler(async (req,res) =>{
     //find the current user
-    const user = await User.findById(req.user.id)
+    const user = await User.findById(req.params.id)
     //get all the current users speeches
     const userSpeeches = await Speech.find({userId: user._id})
     //go through the current users following and get speeches of those users

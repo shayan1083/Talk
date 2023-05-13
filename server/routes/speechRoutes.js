@@ -19,7 +19,7 @@ router.route('/')
 router.route('/:id/like')
     .patch(speechController.like)
 
-router.route('/feed')
+router.route('/feed/:id')
     .get(speechController.getFeed)
 
 router.route('/explore')

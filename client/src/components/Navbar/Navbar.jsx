@@ -4,7 +4,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 const Navbar = () =>{
     return (
         <div className="grid grid-cols-1 md:grid-cols-4 justify-center">
-            <div className="mx-auto md:mx-0 my-4">
+            <div className="visible lg:visible md:visible sm:invisible mx-auto md:mx-0 my-4">
                 {/* app logo */}
                 <img 
                     src="/talk.png" 
@@ -21,9 +21,9 @@ const Navbar = () =>{
                 </div>
             </div>
 
-            <div className="px-0 md:px-6 mx0-auto my-4">
-                <SearchIcon className="absolute m-2"/>
-                <input type="text" placeholder="Search" className="bg-emerald-200 rounded-lg py-2 px-8"></input>
+            <div className="md:px-6 my-4">
+                <SearchIcon className="absolute mx-2 my-2"/>
+                <input type="text" placeholder="Search" className="bg-emerald-200 rounded-lg py-2 placeholder:px-8 w-fit"></input>
             </div>
         </div>
     )

@@ -12,7 +12,7 @@ const Landing = () =>{
             <div className="grid grid-cols-2">
                 <div className='my-4'>
                     {/* app logo */}
-                    <img 
+                    <img
                     src="/talk.png" 
                     alt="Talk Logo" 
                     width={"250px"} 
@@ -21,7 +21,7 @@ const Landing = () =>{
                 </div>
 
                 <div>
-                    <p className='text-9xl font-medium'>Talk!</p>
+                    <p className='lg:text-9xl md:text-9xl sm:text-6xl font-medium'>Talk!</p>
                     <p className='text-l font-light'>A platform to </p>
                 </div>
                 
