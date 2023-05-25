@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import formatDistance from 'date-fns/formatDistance';
@@ -11,6 +11,10 @@ const Speech = ({speech, setData}) =>{
     const [userData, setUserData] = useState()
 
     const dateStr = formatDistance(new Date(speech.createdAt), new Date(), {addSuffix: true})
+    const location = useLocation().pathname
+    const {id} = useParams()
+
+    
     useEffect(() =>{
         const fetchData = async() =>{
             try{
@@ -37,6 +41,32 @@ const Speech = ({speech, setData}) =>{
                     Authorization: `Bearer ${localStorage.getItem('key')}`
                 }
             })
+
+            //depending on current location, show different things
+            if(location.includes("profile")){
+                const newData = await axios.get(`/speeches`, {
+                    headers:{
+                        Authorization: `Bearer ${localStorage.getItem('key')}`
+                    }
+                })
+                console.log("newData: ", newData)
+                setData(newData.data)
+            } else if(location.includes("explore")) {
+                const newData = await axios.get(`/speeches/explore`, {
+                    headers:{
+                        Authorization: `Bearer ${localStorage.getItem('key')}`
+                    }
+                })
+                setData(newData.data)
+            } else {
+                const newData = await axios.get(`/speeches/feed/${currentUser.userData._id}`, {
+                    headers:{
+                        Authorization: `Bearer ${localStorage.getItem('key')}`
+                    }
+                })
+                setData(newData.data)
+            }
+
         }catch(err){
             console.log("error: ",err)
         }
