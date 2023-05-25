@@ -16,7 +16,7 @@ router.route('/')
     .delete(usersController.deleteUser)
 
 //get user by an id
-router.route('/id')
+router.route('/:id')
     .get(usersController.getUserById)
 
 //follow a user by their id

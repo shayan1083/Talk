@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
+import Speech from "../Speech/Speech";
 const Feed = () => {
     const [feed, setFeed] = useState(null)
     const { currentUser } = useSelector((state) => state.user)
@@ -9,7 +9,11 @@ const Feed = () => {
     useEffect(() => {
         const fetchData = async () =>{
             try{
-                const feedSpeech = await axios.get(`/speeches/feed/${currentUser._id}`)
+                const feed = await axios.get(`/speeches/feed/${currentUser.userData._id}`,{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('key')}`
+                }
+                })
                 setFeed(feed.data)
             }catch (err){
                 console.log("error: ",err)
@@ -17,10 +21,17 @@ const Feed = () => {
         }
 
         fetchData()
-    }, [currentUser._id])
+    }, [currentUser.userData._id])
 
-    console.log("Feed: ", feed)
-    return <div></div>
+    return <div className="mt-6">
+        {feed && feed.map((speech =>{
+            return (
+                <div key={speech._id} className="p-2">
+                    <Speech speech={speech} setData={setFeed}/>
+                </div>
+            )
+        }))}
+    </div>
 }
 
 export default Feed

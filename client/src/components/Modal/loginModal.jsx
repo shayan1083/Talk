@@ -15,7 +15,12 @@ const LoginModal = () => {
         e.preventDefault()
         dispatch(loginStart())
         try{
-            const res = await axios.post("/auth/login", {username: username, password:password})
+            const res = await axios.post("/auth/login", {
+                username: username, 
+                password:password
+            },
+            )
+            localStorage.setItem('key', res.data.accessToken)
             dispatch(loginSuccess(res.data));
             navigate("/talk/home")
         } catch(err){
