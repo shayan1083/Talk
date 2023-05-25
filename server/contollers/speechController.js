@@ -92,12 +92,20 @@ const getFeed = asyncHandler(async (req,res) =>{
         })
     )
     //bring both lists of speeches together
-    const feed = userSpeeches.concat(...following)
+    var feed = userSpeeches.concat(...following)
     //if there is nothing in the feed, then send a message
     if(feed.length == 0){
         return res.status(200).json({message: 'Post a speech or follow others to populate your feed'})
     }
+    
+    feed = feed.sort((a,b) => {
+        if(a.createdAt > b.createdAt){
+            return -1
+        }
+       
+    })
 
+    console.log("feed: ", feed)
     res.status(200).json(feed)
 })
 
