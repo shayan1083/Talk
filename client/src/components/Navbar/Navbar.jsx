@@ -16,8 +16,7 @@ const Navbar = () =>{
 
             <div className="col-span-2 md:border-x-2 md:border-emerald-100 md:px-6 my-6 md:my-0">
                 <div className="flex justify-between items-center my-4">
-                    <h2 className="font-bold text-2xl">Home</h2>
-                    <StarBorderIcon/>
+                    <h2 className="font-bold text-2xl">Talk</h2>
                 </div>
             </div>
 

@@ -26,7 +26,7 @@ const Feed = () => {
     return <div className="mt-6">
         {feed && feed.map((speech =>{
             return (
-                <div key={speech._id} className="p-2">
+                <div key={speech._id} className="p-1">
                     <Speech speech={speech} setData={setFeed}/>
                 </div>
             )
