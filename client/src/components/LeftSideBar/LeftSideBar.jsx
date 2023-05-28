@@ -3,9 +3,10 @@ import {Link} from "react-router-dom"
 import HomeIcon from '@mui/icons-material/Home';
 import TagIcon from '@mui/icons-material/Tag';
 import PersonIcon from '@mui/icons-material/Person';
-
+import { useDispatch, useSelector } from "react-redux";
 
 const LeftSideBar = () => {
+    const {currentUser} = useSelector((state)=>state.user)
     return (
         <div className="flex flex-col h-full md:h-[90vh] justify-between mr-6">
             <div className="mt-6 flex flex-col space-y-4">
@@ -21,7 +22,7 @@ const LeftSideBar = () => {
                         <p className="visible lg:visible md:invisible sm:invisible">Explore</p>
                     </div>
                 </Link>
-                <Link to="/talk/profile/id">
+                <Link to={`/talk/profile/${currentUser.userData._id}`}>
                     <div className="flex items-center space-x-1 px-2 py-1 bg-emerald-200 hover:bg-emerald-300 rounded-lg cursor-pointer">
                         <PersonIcon fontSize="large"/>
                         <p className="visible lg:visible md:invisible sm:invisible">My Profile</p>

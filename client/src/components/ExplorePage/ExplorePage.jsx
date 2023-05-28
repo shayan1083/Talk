@@ -17,6 +17,7 @@ const ExplorePage = () =>{
                     }
                 })
                 setExplore(explore.data)
+                console.log(explore)
             }catch(err){
                 console.log("error: ", err)
             }
@@ -26,6 +27,7 @@ const ExplorePage = () =>{
 
     return (
         <div className="mt-6">
+            
         {explore && explore.map((speech)=>{
             return (
                 <div key={speech._id} className="p-2">
