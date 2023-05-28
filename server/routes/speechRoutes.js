@@ -13,7 +13,11 @@ router.route('/post')
 router.route('/')
     //delete a speech
     .delete(speechController.deleteSpeech)
-    //get all the speeches associated with a specific userId
+
+router.route('/explore')
+    .get(speechController.getExplore)
+
+router.route('/:id')
     .get(speechController.getUserSpeeches)
 
 router.route('/:id/like')
@@ -22,7 +26,6 @@ router.route('/:id/like')
 router.route('/feed/:id')
     .get(speechController.getFeed)
 
-router.route('/explore')
-    .get(speechController.getExplore)
+
 
 module.exports = router

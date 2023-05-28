@@ -47,8 +47,10 @@ const deleteSpeech = asyncHandler(async (req,res) =>{
 // @route GET /speeches
 // @access Private
 const getUserSpeeches = asyncHandler(async (req,res) => {
-    const id = req.user.id
-    const speeches = await Speech.find({userId: id})
+    const id = req.params.id
+    const speeches = await Speech.find({userId: id}).sort({
+        createdAt:-1
+    })
     if(!speeches?.length){
         return res.status(400).json({message: 'No speeches found'})
     }
@@ -104,8 +106,6 @@ const getFeed = asyncHandler(async (req,res) =>{
         }
        
     })
-
-    console.log("feed: ", feed)
     res.status(200).json(feed)
 })
 
@@ -115,13 +115,16 @@ const getFeed = asyncHandler(async (req,res) =>{
 // @access Private
 const getExplore = asyncHandler(async (req,res) =>{
     //get speeches that have likes, sort from most to least
-    const explore = await Speech.find({likes: {$exists: true}}).sort(
-        {likes:-1}
-    )
+    const explore = await Speech.find({
+        likes: {$exists: true},
+    }).sort({likes:-1})
+
+    console.log("test")
     if(!explore){
         return res.status(200).json({message: 'Explore page is empty right now, come back later'})
     }
     res.status(200).json(explore)
+
 
 
 })
