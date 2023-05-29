@@ -9,10 +9,12 @@ router.use(verifyJWT)
 
 //get all users
 //edit a user profile
-//delete a user
 router.route('/')
     .get(usersController.getAllUsers)
     .patch(usersController.updateUser)
+
+//delete a user
+router.route('/delete/:id')
     .delete(usersController.deleteUser)
 
 //get user by an id

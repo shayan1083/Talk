@@ -14,6 +14,9 @@ const Feed = () => {
                     Authorization: `Bearer ${localStorage.getItem('key')}`
                 }
                 })
+                if(!feed){
+                    setFeed("No posts right now")
+                }
                 setFeed(feed.data)
             }catch (err){
                 console.log("error: ",err)
@@ -31,6 +34,7 @@ const Feed = () => {
                 </div>
             )
         }))}
+       
     </div>
 }
 

@@ -86,7 +86,7 @@ const updateUser = asyncHandler(async (req,res)=> {
 // @route DELETE /users
 // @access Private
 const deleteUser = asyncHandler(async (req,res)=> {
-    const {id} = req.body
+    const id = req.params.id
 
     //if there is no id then we cant delete an account
     if(!id){
