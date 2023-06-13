@@ -21,12 +21,12 @@ const DeleteProfile = ({setDeleteModal}) => {
         try{
             
             handleLogout()
-            const deleteUser = await axios.delete(`/users/delete/${id}`,     
-            {
-                headers:{
-                    Authorization: `Bearer ${localStorage.getItem('key')}`
-                }
-            })
+            // const deleteUser = await axios.delete(`/users/delete/${id}`,     
+            // {
+            //     headers:{
+            //         Authorization: `Bearer ${localStorage.getItem('key')}`
+            //     }
+            // })
         }catch(err){
             console.log("error: ",err)
         }

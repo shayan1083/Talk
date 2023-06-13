@@ -27,6 +27,7 @@ const SignupModal = () =>{
                 email: email,
                 password:password
             })
+            localStorage.setItem('key', res.data.accessToken)
             dispatch(loginSuccess(res.data));
             navigate("/talk/home")
         } catch(err){

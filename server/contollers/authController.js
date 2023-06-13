@@ -43,7 +43,7 @@ const createUser = asyncHandler(async (req,res)=> {
     const {password, ...userData} = user._doc
     //if user is created then send message otherwise error
     if(user){
-        res.cookie("access_token", token, {httpOnly:true}).status(200).json(userData)
+        res.cookie("access_token", token, {httpOnly:true}).status(200).json({userData, accessToken})
     }
     else{
         res.status(400).json({message: 'Inavlid user data recieved'})

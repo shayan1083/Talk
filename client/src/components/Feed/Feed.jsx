@@ -5,7 +5,6 @@ import Speech from "../Speech/Speech";
 const Feed = () => {
     const [feed, setFeed] = useState(null)
     const { currentUser } = useSelector((state) => state.user)
-
     useEffect(() => {
         const fetchData = async () =>{
             try{
@@ -14,26 +13,26 @@ const Feed = () => {
                     Authorization: `Bearer ${localStorage.getItem('key')}`
                 }
                 })
-                if(!feed){
-                    setFeed("No posts right now")
-                }
                 setFeed(feed.data)
             }catch (err){
                 console.log("error: ",err)
             }
         }
-
         fetchData()
-    }, [currentUser.userData._id])
+    }, [currentUser.userData._id, feed])
+
 
     return <div className="mt-6">
-        {feed && feed.map((speech =>{
+        
+        {feed != null && feed.map((speech =>{
             return (
                 <div key={speech._id} className="p-1">
                     <Speech speech={speech} setData={setFeed}/>
                 </div>
             )
         }))}
+
+        {!feed && console.log("no feed: ", feed)}
        
     </div>
 }
