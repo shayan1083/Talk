@@ -3,7 +3,7 @@ import LeftSideBar from "../../components/LeftSideBar/LeftSideBar"
 import RightSideBar from "../../components/RightSideBar/RightSideBar"
 import {Link} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/userSlice";
+import { logout,following } from "../../redux/userSlice";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Speech from "../../components/Speech/Speech";
@@ -30,6 +30,35 @@ const Profile = () =>{
         dispatch(logout())
     }
 
+    const handleFollow = async() =>{
+        //if the user is not following, then follow
+        if(!currentUser.userData.following.includes(id)){
+            try{
+                const follow = await axios.patch(`/users/follow/${id}`,{}, {
+                    headers:{
+                        Authorization: `Bearer ${localStorage.getItem('key')}`
+                    }
+                })
+                dispatch(following(id))
+            }catch(err){
+                console.log(err)
+            }
+        }
+        //otherwise unfollow
+        else{
+            try{
+                const unfollow = await axios.patch(`/users/unfollow/${id}`, {
+                    headers:{
+                        Authorization: `Bearer ${localStorage.getItem('key')}`
+                    }
+                })
+                dispatch(following(id))
+            }catch(err){
+                console.log(err)
+            }
+        }
+    }
+
     useEffect(()=>{
         //get the user profile data
         const fetchData = async() =>{
@@ -54,7 +83,7 @@ const Profile = () =>{
         }
         fetchData()
         //reset if any of these change
-    },[currentUser, currentUser.userData._id,id])
+    },[currentUser, currentUser.userData._id,id,userSpeeches])
 
     return (
         <>
@@ -69,7 +98,7 @@ const Profile = () =>{
                         {userProfile ? (<p className="flex items-center justify-center text-xl italic font-light">@{userProfile.username}</p>) : (<p>user profile</p>)}
                         {userProfile ? (<p className="font-light">{userProfile.profileDesc}</p>) : (<p>user bio</p>)}
                         {/* if viewing your own profile*/}
-                        {currentUser.userData._id == id ? (
+                        {currentUser.userData._id === id ? (
                             // <div>
                             // <img src="" alt=""></img>
                             // </div>
@@ -89,13 +118,17 @@ const Profile = () =>{
                             </div>
                         //viewing another persons profile while follwing them
                         ): currentUser.userData.following.includes(id) ? (
-                            <button className="px-4 py-2 bg-emerald-300 hover:bg-emerald-400 rounded-lg text-white">
-                                Unfollow
+                            <button 
+                                className="px-4 py-2 bg-emerald-300 hover:bg-emerald-400 rounded-lg text-white"
+                                onClick={handleFollow}>      
+                                    Unfollow
                             </button>
                         ) : (
                         //viewing another persons profile while not following them
-                            <button className="px-4 py-2 bg-emerald-300 hover:bg-emerald-400 rounded-lg text-white">
-                                Follow
+                            <button 
+                                className="px-4 py-2 bg-emerald-300 hover:bg-emerald-400 rounded-lg text-white"
+                                onClick={handleFollow}>
+                                    Follow
                             </button>
                         )}
                     </div>

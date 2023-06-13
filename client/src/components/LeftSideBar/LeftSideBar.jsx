@@ -28,8 +28,12 @@ const LeftSideBar = () => {
                         <p className="visible lg:visible md:invisible sm:invisible">My Profile</p>
                     </div>
                 </Link>
+                <div className="text-center">
+                    <p>{currentUser.userData.fname} {currentUser.userData.lname}</p>
+                    <p>@{currentUser.userData.username}</p>
+                </div>
+                
             </div>
-            
         </div>
     )
 }

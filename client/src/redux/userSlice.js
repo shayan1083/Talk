@@ -28,6 +28,20 @@ export const userSlice = createSlice({
         logout: (state) =>{
             return initialState
         },
+
+        following:(state,action) =>{
+            //if current user has the other users id in their following, then remove that id
+            if(state.currentUser.userData.following.includes(action.payload)){
+                state.currentUser.userData.following.splice(
+                    state.currentUser.userData.following.findIndex(
+                        (followingId) => followingId === action.payload
+                    )
+                )
+            //otherwise push into the array of ids
+            }else{
+                state.currentUser.userData.following.push(action.payload)
+            }
+        }
     },
 })
 
@@ -35,7 +49,8 @@ export const {
     loginStart,
     loginSuccess,
     loginFailed,
-    logout
+    logout,
+    following
 } = userSlice.actions
 
 export default userSlice.reducer

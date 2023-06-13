@@ -63,9 +63,7 @@ const getUserSpeeches = asyncHandler(async (req,res) => {
 const like = asyncHandler(async (req,res) =>{
     //get the speech the user wants to like
     const speech = await Speech.findById(req.params.id)
-    if(speech.userId == req.user.id){
-        return res.status(400).json({message: 'Cannot like your own speech'})
-    }
+
     //if the likes of that tweet doesnt include the users id
     if(!speech.likes.includes(req.user.id)){
         await speech.updateOne({$push: {likes: req.user.id}})
