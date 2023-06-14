@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom"
 import Popup from 'reactjs-popup'
 
 const LoginModal = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+
     const [isOpen, setIsOpen] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
 
@@ -62,10 +63,11 @@ const LoginModal = () => {
                     className="text-xl py-2 rounded-lg px-4 bg-emerald-300 text-black">
                         Log In
                 </button>
+
                 {isOpen && (
-                <div className="text-center text-red-600"> 
-                        {errorMsg}     
-                </div>
+                    <div className="text-center text-red-600"> 
+                            {errorMsg}     
+                    </div>
                 )}
             </form>
             

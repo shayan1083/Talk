@@ -13,6 +13,9 @@ const SignupModal = () =>{
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    const [isOpen, setIsOpen] = useState(false)
+    const [errorMsg, setErrorMsg] = useState("")
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -32,6 +35,8 @@ const SignupModal = () =>{
             navigate("/talk/home")
         } catch(err){
             dispatch(loginFailed())
+            setErrorMsg(err.response.data.message)
+            setIsOpen(true)
             console.log(err)
         }
 
@@ -82,6 +87,12 @@ const SignupModal = () =>{
             className="text-xl py-2 rounded-lg px-4 bg-emerald-200 text-black">
                 Create an account
         </button>
+
+        {isOpen && (
+            <div className="text-center text-red-600"> 
+                    {errorMsg}     
+            </div>
+        )}
 
         
     </form>

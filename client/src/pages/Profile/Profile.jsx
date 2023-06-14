@@ -47,7 +47,7 @@ const Profile = () =>{
         //otherwise unfollow
         else{
             try{
-                const unfollow = await axios.patch(`/users/unfollow/${id}`, {
+                const unfollow = await axios.patch(`/users/unfollow/${id}`, {}, {
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('key')}`
                     }
@@ -95,7 +95,7 @@ const Profile = () =>{
                 {/* middle part of page, where profile is displayed */}
                 <div className="col-span-2 border-x-2 border-emerald-100 px-6">    
                     <div className="flex items-center justify-center grid grid-rows-3 ">
-                        {userProfile ? (<p className="flex items-center justify-center text-xl italic font-light">@{userProfile.username}</p>) : (<p>user profile</p>)}
+                        {userProfile ? (<p className="flex items-center justify-center text-xl">{userProfile.fname} {userProfile.lname}</p>) : (<p>user profile</p>)}
                         {userProfile ? (<p className="font-light">{userProfile.profileDesc}</p>) : (<p>user bio</p>)}
                         {/* if viewing your own profile*/}
                         {currentUser.userData._id === id ? (
