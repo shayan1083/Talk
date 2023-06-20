@@ -18,13 +18,16 @@ const Home = () =>{
             //otherwise show the home page
             <div className="grid grid-cols-1 md:grid-cols-4">
                 <div className="px-6">
-                    <LeftSideBar/>
+                    {/* <div className="position fixed"> */}
+                        <LeftSideBar/>
+                    {/* </div> */}
+                    
                 </div>
                 <div className="col-span-2 border-x-2 border-emerald-100 px-6">
                     <MainSpeech/>
                 </div>
                 <div className="px-6">
-                    <RightSideBar/>
+                    <RightSideBar/>  
                 </div>
             </div>
        )}</>

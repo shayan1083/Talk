@@ -77,7 +77,7 @@ const login = asyncHandler(async (req,res)=> {
     const accessToken = jwt.sign(
         {id: user._id},
         process.env.ACCESS_TOKEN_SECRET,
-        // {expiresIn: '5m'}
+        {expiresIn: '5m'}
         )
 
     //creat refresh token
@@ -89,7 +89,7 @@ const login = asyncHandler(async (req,res)=> {
 
     const {password, ...userData} = user._doc
     //send message with cookie 
-    res.cookie('access_token', accessToken,{httpOnly:true}).status(200).json({userData, accessToken})
+    res.cookie('access_token', accessToken,{httpOnly:true}).status(200).json({userData, accessToken, refreshToken})
 
   
 })

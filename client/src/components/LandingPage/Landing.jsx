@@ -9,7 +9,7 @@ const Landing = () =>{
 
     return (
         <div >
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-3">
                 <div className='my-4'>
                     {/* app logo */}
                     <img
@@ -21,8 +21,8 @@ const Landing = () =>{
                 </div>
 
                 <div>
-                    <p className='lg:text-9xl md:text-9xl sm:text-6xl font-medium'>Talk!</p>
-                    <p className='text-l font-light'>A platform to </p>
+                    <p className='lg:text-9xl md:text-9xl sm:text-6xl font-medium text-center'>Talk!</p>
+                    {/* <p className='text-l font-light'>A platform to </p> */}
                 </div>
                 
             </div>
